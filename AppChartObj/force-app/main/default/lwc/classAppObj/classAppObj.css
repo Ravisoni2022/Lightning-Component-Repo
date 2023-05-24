@@ -1,0 +1,76 @@
+svg {
+    pointer-events: all;
+  }
+rect{
+    fill: #585c99;
+    /* stroke: blue; */
+    width: 83px;
+    height: 60px;
+    stroke-width: 0.5;    
+    /* background-color:linear-gradient(to right, blue , white); */
+
+
+}
+path{
+    fill:none;
+    stroke:rgb(24,35,55);
+    stroke-width: 1;
+    
+}
+text{
+    dominant-baseline: middle;
+    text-anchor: middle;
+   
+
+}
+tspan{
+    pointer-events: none;   
+     /* font-family: Georgia, serif;  */
+     font-weight: bold;
+    font-size: 11px;
+    fill: rgb(14, 13, 13);
+
+}
+
+.bg {
+    background-image: url("/sfsites/c/resource/background");
+    background-size: cover;
+}
+
+.lgc-bg-inverse {
+    background-color: rgb(22, 50, 92);
+}
+
+.avatar {
+    object-fit: cover;
+    flex-direction: row;
+    height: 45px;
+    width: 45px;
+    border-radius: 31px;
+    -webkit-box-shadow: 0 0 5px 2px #bfbfbf;
+    -moz-box-shadow: 0 0 5px 2px #bfbfbf;
+    box-shadow: 0 0 5px 2px #bfbfbf;
+    margin-left: 10px
+}
+/* rect.filled{
+    margin:50px;
+    /* margin-right: 50px;
+    margin-left: 50px; */
+    /* padding: 50px;
+} */
+/* svg text {
+    pointer-events: none;
+} */
+/* .bigger{
+    /* font-size: 15px; */
+    /* font-family: "Times New Roman", Times, serif; */
+    /* text-shadow:1px 1px 0 #444; */
+
+/* } */
+ /* */ 
+/* svg text {
+    pointer-events: none;
+}
+.svg .text {
+    pointer-events: none;
+} */
