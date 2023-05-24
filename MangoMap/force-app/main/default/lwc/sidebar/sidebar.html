@@ -1,0 +1,370 @@
+<template>
+    <div class="MainDiv slds-theme_default">
+        
+        <div >
+            
+            <!-- -------------First component start---------------- -->
+            
+            <template if:true={isStepOne}>
+                
+                <div class="box effect2">
+                    <br/>
+                    <h1 class="mainHeadingP">Select Objects For Map</h1>
+                </div>
+                
+                <div class="Boxstyle detailDiv effect2">
+                    <div class="slds-form-element">
+                        <h1 class="slds-text-heading_large
+                                slds-m-left_xx-large slds-m-top_x-small">
+                            <b class="firstPageHeading2">Select Object for
+                                Map Plotting</b>
+                        </h1>
+
+                        <div>
+                            <h1 class="slds-text-heading_small
+                                    slds-m-left_xx-large slds-m-top_x-small">
+                                <b>Select objects which has address fields</b>
+                            </h1>
+                        </div>
+                    </div>
+                    <!-- ------------Table Start----------- -->
+                    <div class="objectsTable">
+                            <!--<div class="tableborder1">
+                                <lightning-datatable class="standTable" key-field="Id" data={ObjectList.data}
+                                    columns={columns}>
+                                </lightning-datatable>
+                            </div>
+                            
+                            <div class="tableborder2">
+                                <lightning-datatable class="CustomObj" key-field="Id" data={CustomObjectList.data}
+                                    columns={columnCustom}>
+                                </lightning-datatable>
+                            </div>-->
+                    <div class="tabDiv">
+                        <div class="container">
+                            <div class="tabs">
+                              <div class="tabby-tab">
+                                <input type="radio" id="tab-1" name="tabby-tabs" checked>
+                                <label for="tab-1"><b>Standard Object</b></label>
+                                <div class="tabby-content">
+                                    <div class="tableborder1">
+                                        <lightning-datatable class="standTable" key-field="Id" data={ObjectList.data}
+                                            columns={columns}>
+                                        </lightning-datatable>
+                                    </div>
+                                </div>
+                              </div>
+                          
+                              <div class="tabby-tab">
+                                <input type="radio" id="tab-2" name="tabby-tabs">
+                                <label for="tab-2"><b>Custom Object</b></label>
+                                <div class="tabby-content">
+                                    <div class="tableborder2">
+                                        <lightning-datatable class="CustomObj" key-field="Id" data={CustomObjectList.data}
+                                            columns={columnCustom}>
+                                        </lightning-datatable>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                    </div>
+                    </div>
+                    <br/>
+                    </div>  
+                </div>
+<!-- ------------Table End----------- -->
+</template>
+<!-- -------------First component End---------------- -->
+<!-- second component start -->
+<template if:true={isStepTwo}>
+
+                <div>
+                    <div class="box effect2">
+                        <br/>
+                        <h1 class="SecondPageHeading1">Select Base Filters For Map</h1>
+                    </div>
+                    <!--                    <div class="headingDiv">
+                        <h1 class="SecondPageHeading1">Select Base
+                            Filters For Map</h1>
+                    </div>-->
+
+                </div>
+                <div class="Boxstyle detailDiv2step effect2">
+                    <p>Select Object Name</p>
+                    <select onchange={handleSelect}>
+                        <option value="">Select…</option>
+                        <template for:each={obj} for:item="sRow">
+                            <option key={sRow.apiName} value={sRow.apiName}>{sRow.apiName}</option>
+                        </template>
+                    </select>
+                                </br><br><br>
+                                <select class="old-select">
+                                    <option value="html">HTML</option>
+                                    <option value="css">CSS</option>
+                                    <option value="sass">SASS</option>
+                                    <option value="javascript">Javascript</option>
+                                    <option value="jquery" selected>jQuery</option>
+                                </select>
+
+                                <!-- Bouton Select reconstruit -->
+                                <div class="new-select">
+                                    <div class="selection">
+                                        <p>
+                                            <span></span>
+                                            <i></i>
+                                        </p>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                            </br><br><br></br><br><br>
+                </div>
+
+                <div>
+                    <div class="slds-form-element slds-m-top_medium
+                                slds-m-bottom_small" >
+                        <label class="slds-form-element__label
+                                    slds-text-heading_medium
+                                    slds-m-left_xx-large" for="select-01">Select Object Name</label>
+                        <div class="slds-form-element__control
+                                    slds-m-top_medium">
+                            <div class="slds-select_container
+                                        slds-text-heading_medium
+                                        slds-m-left_xx-large">
+                                <select class="slds-select" id="select-01" onchange={handleSelect}>
+                                    <option value="">Select…</option>
+                                    <template for:each={obj} for:item="sRow">
+                                        <option key={sRow.apiName} value={sRow.apiName}>{sRow.apiName}</option>
+                                    </template>
+</select>
+</br><br><br>
+<select class="slds-select fieldsPickList" name="optionSelect" onclick={handleFields}>
+                                    <option value=".">Select…</option>
+                                    <template for:each={fieldsName} for:item="field">
+                                        <option key={field.fieldsName} value={field.fieldsName}>{field.fieldsName}
+                                        </option>
+                                    </template>
+                                </select>
+</div>
+</div>
+</div>
+
+<div class="slds-select_container slds-text-heading_medium slds-m-left_xx-large">
+    <br/>
+    
+    <template for:each={pickListFilterFields} for:item="plf">
+        <b key={plf.fieldApiName}>{plf.fieldsName}</b>
+        <select key={plf.fieldApiName} title={plf.fieldApiName} class="slds-select" name={plf.datatypeName} aria-placeholder="select" onchange={handleFilter}>
+            <option selected disabled="true" value="select">select</option>
+            <template if:true={plf.values} for:each={plf.values} for:item="plv">
+            <option key={plv} value={plv}>{plv}</option>
+            </template>
+        </select>
+        <template for:each={plf.filterValue} for:item="val">
+        <div class="slds-p-around_xx-small" key={val}>
+            <lightning-pill label={val} name={val} >
+            </lightning-pill>
+        </div>
+        </template>
+        
+    </template>
+    <br/><br/>
+    <template for:each={REFERENCE_FilterFields} for:item="plf">
+        
+        <lightning-input key={plf.fieldApiName} type="text" label={plf.fieldsName} title={plf.fieldApiName} name={plf.datatypeName} onchange={handleChangeREF}></lightning-input>
+        &nbsp;
+        <lightning-button-icon key={plf.fieldApiName}  icon-name="utility:add" variant="brand" alternative-text="ADD" onclick={handleFilter}></lightning-button-icon>
+    </template>
+</div>
+<!-- This section is for date picker start from here -->
+<template if:true={dateTrue}>
+                        <div class="slds-grid slds-gutters
+                                slds-m-left_xx-large slds-m-top_xx-large">
+                            <!-- ------Date picker code 1-------- -->
+                            <div>
+                                <span>
+                                    <lightning-input type="dateTime" label="From Date" class="fromDate"
+                                        onchange={handleSelect}></lightning-input>
+                                </span>
+                            </div>
+
+                            <!-- ------Date picker code 2-------- -->
+                            <div>
+                                <span>
+                                    <lightning-input class="slds-m-left_xx-large toDate" type="dateTime" label="To date"
+                                        onchange={handleSelect}></lightning-input>
+                                </span>
+                            </div>
+
+                            <br />
+
+                        </div>
+                    </template>
+
+<!-- This section is for date picker End here -->
+<template if:true={oppTrue}>
+                        <div class="slds-form-element slds-m-top_xx-large">
+                            <div class="slds-select_container
+                                    slds-text-heading_medium
+                                    slds-m-left_xx-large">
+                                <lightning-combobox name="Opportunity
+                                        Stages" label="Opportunity Stages" value={value} placeholder="Select"
+                                    options={opStageOptions} onchange={handleChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-p-around_xx-small">
+                                <template for:each={allOpStage} for:item="val">
+                                    <lightning-pill key={val} label={val} name={val} onremove={handleRemove}>
+                                    </lightning-pill>
+                                </template>
+</div>
+</div>
+
+
+<div class="slds-form-element slds-m-top_xx-large">
+    <div>
+        <p>Amount</p>
+        <lightning-input type="number" id="text-input-id-47" placeholder="Enter
+                                        Amount" class="oppAmount" onchange={handleChangeAmt}></lightning-input>
+        &nbsp;
+        <lightning-button-icon class="addIconBotton" icon-name="utility:add" variant="brand" alternative-text="Settings" onclick={handleSelect}></lightning-button-icon>
+    </div>
+    <br />
+    <div class="slds-p-around_xx-small">
+        <template for:each={selectoppAmount} for:item="val">
+                                    <lightning-pill key={val} label={val} name={val} onremove={handleRemoveAmt}>
+                                    </lightning-pill>
+                                </template>
+    </div>
+</div>
+
+</template>
+
+<template if:true={LeadStatusTrue}>
+                        <div class="slds-form-element
+                                    slds-m-top_xx-large">
+
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container
+                                            slds-text-heading_medium
+                                            slds-m-left_xx-large">
+                                    <lightning-combobox name="Lead
+                                                Status" label="Lead Status" value={value} placeholder="Select"
+                                        options={options} onchange={handleChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <div class="slds-p-around_xx-small">
+                                    <template for:each={allValues} for:item="val">
+                                        <lightning-pill key={val} label={val} name={val} onremove={handleRemove}>
+                                        </lightning-pill>
+                                    </template>
+</div>
+</div>
+<!--<div class="slds-p-around_xx-small">
+                                <lightning-combobox name="Lead Status" label="Lead Status" value={value} placeholder="Select" options={options} onchange={handleChange}> </lightning-combobox>
+                                </div>
+                                <div class="slds-p-around_xx-small">
+                                <template  for:each={allValues} for:item="val">
+                                <lightning-pill key={val} label={val} name={val} onremove={handleRemove} ></lightning-pill>
+                                </template>
+                                </div> -->
+</div>
+</template>
+</div>
+
+
+</template>
+
+<!-- third component start from here -->
+<!-- ------------Map and picklist code start here ------------------- -->
+<template if:true={isStepThree}>
+                <div>
+                    <div class="slds-box slds-box_x-small
+                                slds-m-top_large">
+                        <!-- <iframe id="GoogleMapID" title="Google Maps iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d56926478.761713535!2d82.4137895042728!3d29.44292387886184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1661338250481!5m2!1sen!2sin"
+        referrerpolicy="no-referrer-when-downgrade" allowfullscreen = true></iframe> -->
+                        <lightning-map map-markers={mapMarkers} zoom-level={zoomLevel} list-view={listView}
+                            onload={LocationMarker}>
+                        </lightning-map>
+                    </div>
+
+                </div>
+
+            </template>
+<!--------------Map and picklist code start here -------------------->
+<!-- third component End here -->
+
+<template if:true={isStepFour}>
+                <div class="slds-m-bottom_x-large">
+                    Show Route
+                </div>
+            </template>
+
+<!-- Button start from here  -->
+<div class="button slds-button-group-row
+                        slds-align_absolute-center">
+
+    <template if:true={isEnablePrev}>
+                   <!-- <lightning-button label="Previous" class="slds-m-left_x-small slds-m-left_xx-large" variant="brand"
+                        onclick={handlePrev}></lightning-button> -->
+                        <button class="button-86 buttonPrevious" role="button" onclick={handlePrev}>Previous</button> &emsp;&emsp;
+                </template>
+
+    <template if:true={isEnableNext}>
+                   <!-- <lightning-button label="Next" class="slds-m-left_x-small slds-m-left_xx-large" variant="Success"
+                        onclick={handleNext}></lightning-button>-->
+                        <button class="button-86 buttonNext" role="button" onclick={handleNext}>Next</button>&emsp;&emsp;
+                </template>
+
+    <!-- <template if:true={nextSpinner}>
+                    <lightning-spinner alternative-text="Loading..." variant="brand">
+                    </lightning-spinner>
+                </template> -->
+    <template if:true={isEnablePrev}>
+                    <!--<lightning-button lightning-button variant="destructive" label="Cancel" onclick={handleCancel}
+                        class="slds-m-left_x-small
+                                slds-m-left_xx-large">
+                    </lightning-button> --> 
+                    <button class="button-86 buttonCancel" role="button" onclick={handleCancel}>Cancel</button>
+                </template>
+
+    <template if:true={isEnableFinish}>
+                    <lightning-button label="Ok" class="slds-m-left_x-small slds-m-left_xx-large" variant="Success"
+                        onclick={handleFinish}></lightning-button>
+                </template>
+</div><br/>
+<!-- Button End from here  -->
+<!-- <lightning-card class="slds-theme_shade" title="Batch Class Result" icon-name="custom:custom61" variant="base">
+    <lightning-card title="Progress Bar">
+        <template if:true={isBulk}>
+            <div style="margin-left: 2%;">
+                <lightning-progress-bar value={progress} variant="circular">
+                </lightning-progress-bar>
+            </div>
+            <div class="slds-text-align--center slds-text-title" style="color:forestgreen;">
+                {processStatus}
+            </div>
+        </template>
+    </lightning-card> -->
+<lightning-progress-indicator current-step={currentStep} type="base" variant="base" class="slds-m-top_x-small">
+    <!-- First component start -->
+    <lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+    <!-- First component end -->
+
+    <lightning-progress-step  label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+    <!-- Second component End -->
+
+    <!-- Third component start -->
+
+
+    <lightning-progress-step label="Step 3" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+    <!-- Third component End -->
+
+    <!-- Fourth component start -->
+    <lightning-progress-step label="Step 4" value="4" onclick={handleOnStepClick}></lightning-progress-step>
+    <!-- Fourth component End -->
+</lightning-progress-indicator>
+</div>
+</div>
+<!-- <lightning-button onclick={submit} label="testing">click me</lightning-button> -->
+</template>

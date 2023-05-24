@@ -1,0 +1,37 @@
+<template>
+<div class="slds-scrollable slds-box" style="height:15rem;width:100%">
+          <div class="slds-box slds-box_xx-small slds-theme_shade slds-theme_alert-texture">
+            <div class="slds-grid slds-gutters">
+              <div class="slds-col">
+                <span class="slds-avatar slds-avatar_profile-image-small" ></span>
+                <span ><strong> Contacts with Meeting</strong></span>
+              </div>
+              <div class="slds-col">
+                <lightning-button
+                class="slds-float_right"
+            variant="brand" 
+            key-field="id"
+            label="Export" 
+            title="Export Contact Data" 
+            onclick={exportContactData}>
+          </lightning-button>
+          </div>
+              </div>
+      </div>
+          <template if:false={conList}>
+              <lightning-card>
+                          <lightning-datatable 
+                          hide-checkbox-column="true"
+                          if:true={contacts} 
+                          data={contacts} 
+                          columns={cols} 
+                          key-field="id"
+                          onrowaction={handleRowAction}
+                          row-number-offset={rowOffset}>
+                      </lightning-datatable>
+                  </lightning-card> 
+                  </template> 
+                  
+        </div>
+      
+</template>
